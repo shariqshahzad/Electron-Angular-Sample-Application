@@ -1,0 +1,29 @@
+{
+  "name": "main-electron",
+  "author": "Shariq",
+  "license": "ISC",
+  "version": "1.0.0",
+  "description": "electron project to initialize electron app",
+  "main": "js/app.js",
+  "scripts": {
+    "postinstall": "install-app-deps",
+    "start": "tsc && electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "yourappid",
+    "win": {
+      "target": "NSIS",
+      "icon": "build/icon.ico"
+    }
+  },
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "^20.8.0"
+  },
+  "dependencies": {
+    "sqlite3": "^4.1.1",
+    "custom-electron-titlebar": "^3.2.0"
+  }
+}
