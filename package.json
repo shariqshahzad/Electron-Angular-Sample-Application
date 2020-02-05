@@ -1,20 +1,33 @@
 {
   "name": "black-dashboard-angular",
   "version": "1.0.0",
-  "main": "electron/dist/main.js",
+  "main": "main-electron/js/app.js",
   "description": "Black Dasboard Angular, a Creative Tim Desgin. Coded by Creative Tim",
   "scripts": {
     "test": "ng test",
     "ng": "ng",
-    "build": "ng build",
+    "build": "npm run electron:serve-tsc && ng build",
+    "build:dev": "npm run build -- -c dev",
+    "build:prod": "npm run build -- -c production",
     "lint": "ng lint",
-    "electron": "wait-on http://localhost:4200 && tsc --p electron && electron .",
-    "start": "concurrently -k \"npm run ng-serve\" \"npm run electron\"",
-    "only-electron": "electron .",
     "rebuild": "electron-rebuild -f -w sqlite3",
-    "electron-ts-build": "tsc --p electron && electron .",
-    "dbs-ts-build": "tsc --p dbs",
-    "e2e": "ng e2e"
+    "electron:serve-tsc": "tsc -p ./main-electron/tsconfig.json",
+    "e2e": "ng e2e",
+    "postinstall": "install-app-deps",
+    "start": "concurrently \"npm run ng-serve\" \"npm run electron-serve\"",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "electron-serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron . --serve",
+    "ng-serve": "ng serve",
+    "electron:windows": "npm run build:prod && electron-builder build --windows",
+    "electron:build": "electron-builder build --windows"
+  },
+  "build": {
+    "appId": "yourappid",
+    "win": {
+      "target": "NSIS",
+      "icon": "./main-electron/build/icon.ico"
+    }
   },
   "repository": {
     "type": "git",
@@ -76,8 +89,9 @@
     "@ng-bootstrap/ng-bootstrap": "4.2.1",
     "chart.js": "2.8.0",
     "core-js": "3.1.4",
-    "knex": "^0.20.6",
     "ngx-electron": "^2.2.0",
+    "sqlite3": "^4.1.1",
+    "custom-electron-titlebar": "^3.2.0",
     "ngx-toastr": "10.0.4",
     "node-gyp": "^6.1.0",
     "rxjs": "6.5.2",
@@ -86,13 +100,14 @@
     "zone.js": "0.9.1"
   },
   "devDependencies": {
+    "electron": "7.1.7",
+    "electron-builder": "21.2.0",
     "@angular-devkit/build-angular": "0.800.3",
     "@angular/cli": "8.0.3",
     "@angular/compiler-cli": "8.0.2",
     "@angular/language-service": "8.0.2",
     "@types/jasmine": "3.3.13",
     "@types/jasminewd2": "2.0.6",
-    "@types/knex": "^0.16.1",
     "@types/node": "12.0.8",
     "codelyzer": "5.1.0",
     "concurrently": "^5.0.2",

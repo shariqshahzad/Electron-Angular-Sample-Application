@@ -24,8 +24,8 @@ var Main = /** @class */ (function () {
             frame: false
         });
         console.log('file://' + __dirname + '/web-dist/index.html');
-        //Main.mainWindow.loadURL('file://' + __dirname + '/web-dist/index.html');
-        Main.mainWindow.loadURL('http://localhost:4200');
+        Main.mainWindow.loadURL('file://' + __dirname + '/web-dist/index.html');
+        //Main.mainWindow.loadURL('http://localhost:4200');
         Main.mainWindow.on('closed', Main.onClose);
         electron_1.ipcMain.on('ping', function (event, arg) {
             console.log('ping');

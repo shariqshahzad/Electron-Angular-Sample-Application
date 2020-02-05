@@ -27,8 +27,8 @@ export default class Main {
             frame: false
         })
         console.log('file://' + __dirname + '/web-dist/index.html');
-        //Main.mainWindow.loadURL('file://' + __dirname + '/web-dist/index.html');
-        Main.mainWindow.loadURL('http://localhost:4200');
+        Main.mainWindow.loadURL('file://' + __dirname + '/web-dist/index.html');
+        //Main.mainWindow.loadURL('http://localhost:4200');
         Main.mainWindow.on('closed', Main.onClose);
         ipcMain.on('ping', (event, arg) => {
             console.log('ping');

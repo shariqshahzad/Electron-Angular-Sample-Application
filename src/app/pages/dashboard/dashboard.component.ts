@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import Chart from 'chart.js';
-import { IpcRenderer } from 'electron';
 import { ElectronService } from 'ngx-electron';
 
 @Component({
@@ -16,7 +15,6 @@ export class DashboardComponent implements OnInit {
   public clicked: boolean = true;
   public clicked1: boolean = false;
   public clicked2: boolean = false;
-  private ipc: IpcRenderer
   constructor(private _electronService: ElectronService) {
     console.log(this._electronService.isElectronApp)
   }
